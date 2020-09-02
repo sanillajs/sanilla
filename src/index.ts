@@ -11,13 +11,16 @@ export const stringToEngine = (html: string) => {
 
 	const fragment = template.content.cloneNode(true) as HTMLElement;
 	const scripts = fragment.querySelectorAll('script');
-	scripts.forEach((script: HTMLElement) => {
+	scripts.forEach((script: HTMLElement, idx: number) => {
 		const src = script.getAttribute('src');
 		if ( src ) {
-			/* do nothing */
+			const newScript = document.createElement('script');
+			newScript.src = src;
+			fragment.appendChild(newScript);
 		} else {
 			eval(script.innerText);
 		}
+		script.remove();
 	});
 
 	return fragment.children;
@@ -34,7 +37,6 @@ export const append = (selector: (string|HTMLElement), html: (string|HTMLElement
 
 	if (selector && selector instanceof HTMLElement ) {
 		if ( html instanceof HTMLElement ) {
-			console.log('this is element', html);
 			selector.append(html);
 		} else if ( html instanceof HTMLCollection ) {
 			while ( html.length > 0 ) {

@@ -34,10 +34,11 @@ export const append = (selector: (string|HTMLElement), html: (string|HTMLElement
 
 	if (selector && selector instanceof HTMLElement ) {
 		if ( html instanceof HTMLElement ) {
+			console.log('this is element', html);
 			selector.append(html);
 		} else if ( html instanceof HTMLCollection ) {
-			for ( let i = 0; i < html.length;i++ ) {
-				selector.append(html[i]);
+			while ( html.length > 0 ) {
+				selector.append(html[0]);
 			}
 		}
 	} else  {
@@ -58,8 +59,8 @@ export const prepend = (selector: (string|HTMLElement), html: (string|HTMLElemen
 		if ( html instanceof HTMLElement ) {
 			selector.prepend(html);
 		} else if ( html instanceof HTMLCollection ) {
-			for ( let i = 0; i < html.length;i++ ) {
-				selector.prepend(html[i]);
+			while ( html.length > 0 ) {
+				selector.prepend(html[0]);
 			}
 		}
 	} else {

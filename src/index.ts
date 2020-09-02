@@ -10,18 +10,6 @@ export const stringToEngine = (html: string) => {
 	template.innerHTML = html;
 
 	const fragment = template.content.cloneNode(true) as HTMLElement;
-	const scripts = fragment.querySelectorAll('script');
-	scripts.forEach((script: HTMLElement, idx: number) => {
-		const src = script.getAttribute('src');
-		if ( src ) {
-			const newScript = document.createElement('script');
-			newScript.src = src;
-			fragment.appendChild(newScript);
-		} else {
-			eval(script.innerText);
-		}
-		script.remove();
-	});
 
 	return fragment.children;
 }
@@ -40,7 +28,21 @@ export const append = (selector: (string|HTMLElement), html: (string|HTMLElement
 			selector.append(html);
 		} else if ( html instanceof HTMLCollection ) {
 			while ( html.length > 0 ) {
-				selector.append(html[0]);
+				if ( html[0].tagName.toLowerCase() === 'script' ) {
+					const script = html[0] as HTMLElement;
+					const src = script.getAttribute('src');
+					if ( src ) {
+						const newScript = document.createElement('script');
+						newScript.src = src;
+						selector.append(newScript);
+					} else {
+						console.log(script.innerText);
+						window.eval(script.innerText);
+					}
+					script.remove();
+				} else {
+					selector.append(html[0]);
+				}
 			}
 		}
 	} else  {
@@ -62,10 +64,34 @@ export const prepend = (selector: (string|HTMLElement), html: (string|HTMLElemen
 			selector.prepend(html);
 		} else if ( html instanceof HTMLCollection ) {
 			while ( html.length > 0 ) {
-				selector.prepend(html[0]);
+				if ( html[0].tagName.toLowerCase() === 'script' ) {
+					const script = html[0] as HTMLElement;
+					const src = script.getAttribute('src');
+					if ( src ) {
+						const newScript = document.createElement('script');
+						newScript.src = src;
+						selector.append(newScript);
+					} else {
+						console.log(script.innerText);
+						window.eval(script.innerText);
+					}
+					script.remove();
+				} else {
+					selector.append(html[0]);
+				}
 			}
 		}
 	} else {
 		throw Error('Wrong selector');
 	}
+}
+
+export const mount = (selector: (string|HTMLElement), html: (string|HTMLElement|HTMLCollection)) => {
+	if ( typeof selector === 'string' ) {
+		selector = document.querySelector(selector) as HTMLElement;
+	}
+
+	selector.innerHTML = '';
+
+	append(selector, html);
 }

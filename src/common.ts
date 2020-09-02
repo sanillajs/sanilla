@@ -10,5 +10,6 @@ export default {
 	stringToEngine: sanilla.stringToEngine,
 	append: sanilla.append,
 	prepend: sanilla.prepend,
-};
+	mount: sanilla.mount,
+} as any;
 

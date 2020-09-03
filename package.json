@@ -1,6 +1,6 @@
 {
 	"name": "@sanillajs/sanilla",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "sanilla",
 	"main": "dist/common.js",
 	"description": "Very easy and simple single page application framework.",

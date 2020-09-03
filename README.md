@@ -51,3 +51,21 @@ Sanilla.mount('#root', app);
 	</body>
 </html>
 ```
+
+## [Sanilla-Router](https://github.com/sanillajs/sanilla-router)
+```js
+import Sanilla from '@sanillajs/sanilla';
+import SanillaRouter from '@sanillajs/sanilla-router';
+
+import app from './app.html';
+import home from './views/home.html';
+import about from './views/about.html';
+import hello from './views/hello.html';
+
+Sanilla.append('#root', app);
+Sanilla.router = new SanillaRouter('#router', {
+	'/': home,
+	'/about': about,
+	'/hello': hello,
+});
+```

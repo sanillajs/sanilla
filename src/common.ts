@@ -5,11 +5,17 @@
  * Copyright (c) Sanilla. Licensed under the MIT License.
  */
 
-import * as sanilla from './index';
-export default {
-	stringToEngine: sanilla.stringToEngine,
-	append: sanilla.append,
-	prepend: sanilla.prepend,
-	mount: sanilla.mount,
-} as any;
+import { Sanilla } from './index';
+
+declare global {
+	interface Window {
+		Sanilla: any;
+	}
+}
+
+if ( !window.Sanilla ) {
+	window.Sanilla = new Sanilla();
+}
+
+export default window.Sanilla;
 

@@ -5,14 +5,7 @@
  * Copyright (c) Sanilla. Licensed under the MIT License.
  */
 
-import * as sanilla from './index';
-
-interface Sanilla {
-	stringToEngine: (string) => HTMLCollection;
-	append: (selector: (string | HTMLElement), html: (string | HTMLElement | HTMLCollection)) => void;
-	prepend: (selector: (string | HTMLElement), html: (string | HTMLElement | HTMLCollection)) => void;
-	mount: (selector: (string | HTMLElement), html: (string | HTMLElement | HTMLCollection)) => void;
-}
+import { Sanilla } from './index';
 
 declare global {
 	interface Window {
@@ -20,9 +13,6 @@ declare global {
 	}
 }
 
-window.Sanilla = {
-	stringToEngine: sanilla.stringToEngine,
-	append: sanilla.append,
-	prepend: sanilla.prepend,
-	mount: sanilla.mount,
-} as any;
+if ( !window.Sanilla ) {
+	window.Sanilla = new Sanilla();
+}

@@ -69,3 +69,11 @@ Sanilla.router = new SanillaRouter('#router', {
 	'/hello': hello,
 });
 ```
+
+## [Sanilla-Cli](https://github.com/sanillajs/sanilla-cli)
+```sh
+sanilla-cli init my-project
+cd my-project
+npm install
+npm run dev
+```

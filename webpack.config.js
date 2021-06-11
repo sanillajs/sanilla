@@ -22,7 +22,12 @@ module.exports = {
 			{
 				"test": /\.ts$/,
 				"loader": "ts-loader",
-				"exclude": /node-modules/,
+				"exclude": /node_modules/,
+			},
+			{
+				"test": /\.js$/,
+				"loader": "babel-loader",
+				"exclude": /node_modules/,
 			},
 		],
 	},
